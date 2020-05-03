@@ -8,21 +8,21 @@ namespace EigthQueens
 {
     public class Subject
     {
-        public List<int> SeriesValues  { get; set; }
+        public List<double> SeriesValues  { get; set; }
         public double FitnessValue { get; set; }
         double DValue { get; set; }
 
 
         public Subject(double dValue)
         {
-            SeriesValues = new List<int>();
+            SeriesValues = new List<double>();
             DValue = dValue;
         }
 
         // f (x) = 10D + Σ to D from i=1(x²i − 10cos(2πxi))
         public void CalculateFitnessValue()
         {
-            double result = 0;
+            double result;
             if (!SeriesValues.Any())
             {
                 Console.WriteLine("Empty list");
@@ -39,7 +39,7 @@ namespace EigthQueens
             }
             result = (10 * DValue) - summationAcum; // 10D + Σ to D from i=1(x²i − 10cos(2πxi))
 
-            FitnessValue = result;
+            FitnessValue = Math.Round(result, 3);
 		}
 
         override
@@ -48,7 +48,7 @@ namespace EigthQueens
             String array = "";
             for (int i = 0; i < SeriesValues.Count; i++)
             {
-                array += "|" + SeriesValues[0];
+                array += "|" + SeriesValues[i];
             }
             return FitnessValue.ToString() + " : " + array;
         }

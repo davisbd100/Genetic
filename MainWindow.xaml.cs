@@ -27,7 +27,7 @@ namespace EigthQueens
 
         private void btEvolution_Click(object sender, RoutedEventArgs e)
         {
-            population = new Population();
+            population = new Population(50,10,-5.120,5.120,10000,0.8,50000);
             population.StartEvolutionProcess();
             Console.WriteLine(population.CurrentEvaluation);
             FillGridGenerations();
@@ -47,7 +47,6 @@ namespace EigthQueens
                 mediaChart.Add(item.Media);
                 bestValueChart.Add(item.BetterSubject.FitnessValue);
                 worstValueChart.Add(item.WorstSubject.FitnessValue);
-                convergenceValue.Add(population.MaxValue);
             }
 
             SeriesCollection standardDeviationSeries =new SeriesCollection

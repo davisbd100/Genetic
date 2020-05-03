@@ -12,6 +12,7 @@ namespace EigthQueens
         double MutationProbability { get; set; }
         int PopulationSize { get; set; }
         int MaxEval { get; set; }
+        int MaxGenerations { get; set; }
         int DValue { get; set; }
         double MinorRange { get; set; }
         double MaximumRange { get; set; }
@@ -26,7 +27,7 @@ namespace EigthQueens
         //Miscelanous Values
         static readonly Random random = new Random();
 
-        public Population(int populationSize, int dValue, double minorRange, double maxRange, int maxEval, double mutationProbability)
+        public Population(int populationSize, int dValue, double minorRange, double maxRange, int maxEval, double mutationProbability, int maxGenerations)
         {
             PopulationSize = populationSize;
             MaxEval = maxEval;
@@ -34,19 +35,20 @@ namespace EigthQueens
             DValue = dValue;
             MinorRange = minorRange;
             MaximumRange = maxRange;
-
+            MaxGenerations = maxGenerations;
 
             Subjects = new List<Subject>();
             Generations = new List<GenerationData>();
             GenerateRandomPopulation();
+            Console.WriteLine();
         }
 
         void GenerateRandomPopulation()
         {
             for (int i = 0; i < PopulationSize; i++)
             {
-                Subject tempSubject = new Subject(BoardSize, MaxValue);
-                tempSubject.Board = RandomGenerator();
+                Subject tempSubject = new Subject(DValue);
+                tempSubject.SeriesValues = RandomGenerator();
                 tempSubject.CalculateFitnessValue();
                 Subjects.Add(tempSubject);
             }
@@ -58,14 +60,16 @@ namespace EigthQueens
         {
             Subjects = Subjects.OrderBy(a => a.FitnessValue).ToList();
         }
-        int[] RandomGenerator()
+        List<double> RandomGenerator()
         {
-            int[] result = new int[BoardSize];
-            for (int i = 0; i < BoardSize; i++)
+            List<double> result = new List<double>();
+            for (int i = 0; i < DValue; i++)
             {
-                result[i] = i;
+                double asignValue = random.NextDouble() * (MaximumRange - MinorRange) + MinorRange;
+                asignValue = Math.Round(asignValue, 3);
+                result.Add(asignValue);
             }
-            result = result.OrderBy(x => random.Next()).ToArray();
+
             return result;
         }
 
@@ -74,37 +78,11 @@ namespace EigthQueens
             return Subjects[random.Next(0, PopulationSize)];
         }
 
-        Subject GetChild(Subject ParentA, Subject ParentB)
-        {
-            Subject child = new Subject(BoardSize, MaxValue);
-            for (int i = 0; i < BoardSize; i++)
-            {
-                if (i < 4)
-                {
-                    for (int j = 0; j < BoardSize; j++)
-                    {
-                        if (!child.Board.Contains(ParentA.Board[j]))
-                        {
-                            child.Board[i] = ParentA.Board[j];
-                            break;
-                        }
-                    }
-                }
-                else
-                {
-                    for (int j = 0; j < BoardSize; j++)
-                    {
-                        if (!child.Board.Contains(ParentB.Board[j]))
-                        {
-                            child.Board[i] = ParentB.Board[j];
-                            break;
-                        }
-                    }
-                }
-            }
-            CurrentEvaluation++;
-            return child;
-        }
+        //Subject GetChild(Subject ParentA, Subject ParentB)
+        //{
+        //    CurrentEvaluation++;
+
+        //}
         void ReplaceWorst(Subject ChildA, Subject ChildB)
         {
             Subjects.Remove(Subjects.First());
@@ -117,44 +95,37 @@ namespace EigthQueens
             OrderList();
         }
 
-        void Reproduction()
-        {
-            List<Subject> parents = new List<Subject>();
-            for (int i = 0; i < Parents; i++)
-            {
-                parents.Add(GetRandomParent());
-            }
-            parents = parents.OrderBy(a => a.FitnessValue).ToList();
+        //void Reproduction()
+        //{
+        //    List<Subject> parents = new List<Subject>();
 
-            Subject childA = GetChild(parents[0], parents[1]);
-            Subject childB = GetChild(parents[1], parents[0]);
-            if (random.NextDouble() <= MutationProbability)
-            {
-                childA = Mutate(childA);
-            }
+        //    if (random.NextDouble() <= MutationProbability)
+        //    {
+        //        childA = Mutate(childA);
+        //    }
 
-            if (random.NextDouble() <= MutationProbability)
-            {
-                childB = Mutate(childB);
-            }
+        //    if (random.NextDouble() <= MutationProbability)
+        //    {
+        //        childB = Mutate(childB);
+        //    }
 
-            ReplaceWorst(childA, childB);
-        }
+        //    ReplaceWorst(childA, childB);
+        //}
 
-        Subject Mutate(Subject Child)
-        {
-            int changeValueA = random.Next(0, BoardSize); 
-            int changeValueB = random.Next(0, BoardSize);
-            int tempValue = Child.Board[changeValueA];
-            while (changeValueA == changeValueB)
-            {
-                changeValueB = random.Next(0, BoardSize);
-            }
-            Child.Board[changeValueA] = Child.Board[changeValueB];
-            Child.Board[changeValueB] = tempValue;
+        //Subject Mutate(Subject Child)
+        //{
+        //    int changeValueA = random.Next(0, BoardSize); 
+        //    int changeValueB = random.Next(0, BoardSize);
+        //    int tempValue = Child.Board[changeValueA];
+        //    while (changeValueA == changeValueB)
+        //    {
+        //        changeValueB = random.Next(0, BoardSize);
+        //    }
+        //    Child.Board[changeValueA] = Child.Board[changeValueB];
+        //    Child.Board[changeValueB] = tempValue;
 
-            return Child;
-        }
+        //    return Child;
+        //}
 
         public Subject ObtainBestSubject()
         {
@@ -165,18 +136,12 @@ namespace EigthQueens
         public void StartEvolutionProcess()
         {
             int generationCont = 0;
-            while (CurrentEvaluation < MaxEval)
+            while (CurrentEvaluation < MaxEval || generationCont < MaxGenerations)
             {
                 GenerationData generation = new GenerationData(generationCont + 1, Subjects);
                 Generations.Add(generation);
                 generationCont++;
-                if (generation.BetterSubject.FitnessValue == MaxValue)
-                {
-                    Console.WriteLine("Found");
-                    break;
-                }
 
-                Reproduction();
             }
         }
     }

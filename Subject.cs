@@ -8,42 +8,47 @@ namespace EigthQueens
 {
     public class Subject
     {
-        public int[] Board { get; set; }
-        public int FitnessValue { get; set; }
-        int MaxValue { get; set; }
+        public List<int> SeriesValues  { get; set; }
+        public double FitnessValue { get; set; }
+        double DValue { get; set; }
 
 
-        public Subject(int size, int maxValue)
+        public Subject(double dValue)
         {
-            Board = new int[size];
-            MaxValue = maxValue;
+            SeriesValues = new List<int>();
+            DValue = dValue;
         }
 
+        // f (x) = 10D + Σ to D from i=1(x²i − 10cos(2πxi))
         public void CalculateFitnessValue()
         {
-			int collisions = 0;
-			for (int i = 0; i < Board.Length; i++)
-			{
-				int actualRow = Board[i];
-				for (int j = i + 1; j < Board.Length; j++)
-				{
-                    if (Math.Abs(j - i) == Math.Abs(Board[j] - actualRow))
-                    {
-                        collisions++;
-                    }
-				}
-			}
+            double result = 0;
+            if (!SeriesValues.Any())
+            {
+                Console.WriteLine("Empty list");
+                return;
+            }
+            double summationAcum = 0;
+            foreach (var item in SeriesValues)
+            {
+                double firstValue = 2 * Math.PI * item; //(2πxi)
+                double secondValue = Math.Cos(firstValue); // cos(2πxi)
+                double thirdValue = 10 * secondValue; // 10cos(2πxi)
+                double fourthValue = Math.Pow(item, 2) - thirdValue; // (x²i − 10cos(2πxi)
+                summationAcum += fourthValue;
+            }
+            result = (10 * DValue) - summationAcum; // 10D + Σ to D from i=1(x²i − 10cos(2πxi))
 
-			FitnessValue = MaxValue - collisions;
+            FitnessValue = result;
 		}
 
         override
         public String ToString()
         {
             String array = "";
-            for (int i = 0; i < Board.Length; i++)
+            for (int i = 0; i < SeriesValues.Count; i++)
             {
-                array += "|" + Board[i];
+                array += "|" + SeriesValues[0];
             }
             return FitnessValue.ToString() + " : " + array;
         }

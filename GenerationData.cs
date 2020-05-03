@@ -14,10 +14,12 @@ namespace EigthQueens
         public double Media { get; set; }
         public double Median { get; set; }
         public double StandardDeviation { get; set; }
+        public double TotalPopulationFitness { get; set; }
 
-        public GenerationData(int generationNumber, List<Subject> generationList)
+        public GenerationData(int generationNumber, double totalPopulationFitness, List<Subject> generationList)
         {
             GenerationNumber = generationNumber;
+            TotalPopulationFitness = totalPopulationFitness;
             Media = CalculateMedia(generationList);
             Median = CalculateMedian(generationList);
             BetterSubject = generationList.Last();

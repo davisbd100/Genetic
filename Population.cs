@@ -73,9 +73,44 @@ namespace EigthQueens
             return result;
         }
 
-        Subject GetRandomParent()
+        List<Subject> SpinRouletteParent(int parentsNumber)
         {
-            return Subjects[random.Next(0, PopulationSize)];
+            List<Subject> result = new List<Subject>();
+            double upperLimit = Generations.Last().TotalPopulationFitness;
+
+            for (int i = 0; i < parentsNumber; i++)
+            {
+                double spinValue = Math.Round(random.NextDouble() * (upperLimit - 0.001) + 0.001, 3);
+                double acumSumm = 0;
+                int rouletteSelector = 0;
+                int selectedValue = 0;
+                while (acumSumm < spinValue)
+                {
+                    acumSumm += Subjects[rouletteSelector].FitnessValue;
+                    if (rouletteSelector < Subjects.Count)
+                    {
+                        selectedValue = rouletteSelector;
+                        rouletteSelector++;
+                    }
+                    else
+                    {
+                        selectedValue = rouletteSelector;
+                        rouletteSelector = 0;
+                    }
+                }
+                result.Add(Subjects[selectedValue]);
+            }
+
+            return result;
+        }
+        double SummAllSubjects()
+        {
+            double result = 0;
+            foreach (var item in Subjects)
+            {
+                result += item.FitnessValue;
+            }
+            return result;
         }
 
         //Subject GetChild(Subject ParentA, Subject ParentB)
@@ -138,7 +173,7 @@ namespace EigthQueens
             int generationCont = 0;
             while (CurrentEvaluation < MaxEval || generationCont < MaxGenerations)
             {
-                GenerationData generation = new GenerationData(generationCont + 1, Subjects);
+                GenerationData generation = new GenerationData(generationCont + 1, SummAllSubjects(), Subjects);
                 Generations.Add(generation);
                 generationCont++;
 

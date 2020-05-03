@@ -8,30 +8,33 @@ namespace EigthQueens
 {
     public class Population
     {
+        //Configuration Values
         double MutationProbability { get; set; }
         int PopulationSize { get; set; }
-        int Parents { get; set; }
         int MaxEval { get; set; }
-        int BoardSize { get; set; }
-        public int CurrentEvaluation { get; set; }
-        List<Subject> Subjects { get; set; }
-        static readonly Random random = new Random();
-        public List<GenerationData> Generations { get; set; }
-        public int MaxValue { get; set; }
+        int DValue { get; set; }
+        double MinorRange { get; set; }
+        double MaximumRange { get; set; }
 
-        public Population(int populationSize, int boardSize, int maxEval, double mutationProbability, int parents)
+        //Count Values
+        public int CurrentEvaluation { get; set; }
+
+        //Storage Structures
+        List<Subject> Subjects { get; set; }
+        public List<GenerationData> Generations { get; set; }
+
+        //Miscelanous Values
+        static readonly Random random = new Random();
+
+        public Population(int populationSize, int dValue, double minorRange, double maxRange, int maxEval, double mutationProbability)
         {
             PopulationSize = populationSize;
-            BoardSize = boardSize;
             MaxEval = maxEval;
             MutationProbability = mutationProbability;
-            Parents = parents;
-            int sumTotal = 0;
-            for (int i = boardSize - 1; i > 0; i--)
-            {
-                sumTotal += i;
-            }
-            MaxValue = sumTotal;
+            DValue = dValue;
+            MinorRange = minorRange;
+            MaximumRange = maxRange;
+
 
             Subjects = new List<Subject>();
             Generations = new List<GenerationData>();

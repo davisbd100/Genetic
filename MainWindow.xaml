@@ -1,0 +1,41 @@
+﻿<Window x:Class="EigthQueens.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+        xmlns:local="clr-namespace:EigthQueens"
+        mc:Ignorable="d"
+        Title="VentanaPrincipal" Height="720" Width="1100" ResizeMode="NoResize">
+    <Grid>
+        <Label x:Name="lbPopulation" Content="Tamaño de poblacion:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="50,36,0,0"/>
+        <TextBox x:Name="tbPopulation" HorizontalAlignment="Left" Height="23" Margin="202,36,0,0" TextWrapping="Wrap" Text="100" VerticalAlignment="Top" Width="37"/>
+        <Label x:Name="lbGenerationsNumber" Content="Generaciones maximas:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="42,68,0,0"/>
+        <TextBox x:Name="tbBoard" HorizontalAlignment="Left" Height="23" Margin="202,71,0,0" TextWrapping="Wrap" Text="8" VerticalAlignment="Top" Width="37"/>
+        <Label x:Name="lbEvaluation" Content="Evaluaciones Maximas:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="47,104,0,0"/>
+        <TextBox x:Name="tbEvaluation" HorizontalAlignment="Left" Height="23" Margin="202,104,0,0" TextWrapping="Wrap" Text="10000" VerticalAlignment="Top" Width="42"/>
+        <Label x:Name="lbMutation" Content="Probabilidad de mutacion:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="28,141,0,0"/>
+        <TextBox x:Name="tbMutation" HorizontalAlignment="Left" Height="23" Margin="202,141,0,0" TextWrapping="Wrap" Text="0.8" VerticalAlignment="Top" Width="37"/>
+        <Label x:Name="lbUndefinedProperty" Content="Propiedad no definida" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="42,173,0,0"/>
+        <TextBox x:Name="tbUndefinedProperty" HorizontalAlignment="Left" Height="23" Margin="202,173,0,0" TextWrapping="Wrap" Text="5" VerticalAlignment="Top" Width="37"/>
+        <DataGrid x:Name="gridGenerations" HorizontalAlignment="Left" Height="332" Margin="550,78,0,0" VerticalAlignment="Top" Width="540" IsReadOnly="True"/>
+        <TextBlock x:Name="tblGenerations" HorizontalAlignment="Left" Margin="755,41,0,0" TextWrapping="Wrap" Text="Generaciones" VerticalAlignment="Top" Height="32" Width="156" FontSize="24"/>
+        <Button x:Name="btEvolution" Content="Iniciar Evolución" HorizontalAlignment="Left" Margin="130,234,0,0" VerticalAlignment="Top" Width="109" Height="23" Click="btEvolution_Click"/>
+        <Grid x:Name="standardDeviationChart" HorizontalAlignment="Left" Height="240" Margin="10,440,0,0" VerticalAlignment="Top" Width="309">
+            <lvc:CartesianChart Name="StandarDeviationChart"/>
+        </Grid>
+        <Grid x:Name="MediaGrid" HorizontalAlignment="Left" Height="240" Margin="324,440,0,0" VerticalAlignment="Top" Width="250">
+            <lvc:CartesianChart Name="MediaChart"/>
+        </Grid>
+        <Grid x:Name="bestValueGrid" HorizontalAlignment="Left" Height="240" Margin="579,440,0,0" VerticalAlignment="Top" Width="250">
+            <lvc:CartesianChart Name="BestValueChart"/>
+        </Grid>
+        <Grid x:Name="worstValueGrid" HorizontalAlignment="Left" Height="240" Margin="834,440,0,0" VerticalAlignment="Top" Width="250">
+            <lvc:CartesianChart Name="WorstValueChart"/>
+        </Grid>
+        <TextBlock x:Name="tblStandardDeviation" HorizontalAlignment="Left" Margin="108,422,0,0" TextWrapping="Wrap" Text="Desviación estándar" VerticalAlignment="Top" Height="18" Width="107"/>
+        <TextBlock x:Name="tblMedia" HorizontalAlignment="Left" Margin="443,422,0,0" TextWrapping="Wrap" Text="Media" VerticalAlignment="Top" Height="18" Width="39"/>
+        <TextBlock x:Name="tblBetterValue" HorizontalAlignment="Left" Margin="678,422,0,0" TextWrapping="Wrap" Text="Valor del mejor" VerticalAlignment="Top" Height="18" Width="86"/>
+        <TextBlock x:Name="tblWorstValue" HorizontalAlignment="Left" Margin="916,422,0,0" TextWrapping="Wrap" Text="Valor del peor" VerticalAlignment="Top" Height="18" Width="77"/>
+    </Grid>
+</Window>

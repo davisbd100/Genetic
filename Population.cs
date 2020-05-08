@@ -129,12 +129,13 @@ namespace EigthQueens
 
             List<Subject> childs = Crossover(parents[0], parents[1]);
 
-            if (random.NextDouble() <= MutationProbability)
+            foreach (var item in childs)
             {
-                child = Mutate(child);
-            }
+                Subject child = Mutate(item);
 
-            ReplaceWorst(child);
+                ReplaceWorst(child);
+            }
+            
         }
 
         List<Subject> Crossover(Subject parentA, Subject parentB)
@@ -183,20 +184,17 @@ namespace EigthQueens
             return childs;
         }
 
-        //Subject Mutate(Subject Child)
-        //{
-        //    int changeValueA = random.Next(0, BoardSize); 
-        //    int changeValueB = random.Next(0, BoardSize);
-        //    int tempValue = Child.Board[changeValueA];
-        //    while (changeValueA == changeValueB)
-        //    {
-        //        changeValueB = random.Next(0, BoardSize);
-        //    }
-        //    Child.Board[changeValueA] = Child.Board[changeValueB];
-        //    Child.Board[changeValueB] = tempValue;
-
-        //    return Child;
-        //}
+        Subject Mutate(Subject Child)
+        {
+            for (int i = 0; i < Child.SeriesValues.Count; i++)
+            {
+                if (random.NextDouble() <= MutationProbability)
+                {
+                    Child.SeriesValues[i] = Math.Round(random.NextDouble() * (MaximumRange - MinorRange) + MinorRange, 3); ;
+                }
+            }
+            return Child;
+        }
 
         public Subject ObtainBestSubject()
         {

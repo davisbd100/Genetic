@@ -18,6 +18,7 @@ namespace EigthQueens
         int DValue { get; set; }
         double MinorRange { get; set; }
         double MaximumRange { get; set; }
+        bool FunctionValue { get; set; }
 
         //Count Values
         public int CurrentEvaluation { get; set; } = 0;
@@ -30,7 +31,7 @@ namespace EigthQueens
         //Miscelanous Values
         static readonly Random random = new Random();
 
-        public Population(int populationSize, int dValue, double minorRange, double maxRange, int maxEval, double mutationProbability, int maxGenerations, double alphaValue)
+        public Population(int populationSize, int dValue, double minorRange, double maxRange, int maxEval, double mutationProbability, int maxGenerations, double alphaValue, bool function)
         {
             PopulationSize = populationSize;
             MaxEval = maxEval;
@@ -40,6 +41,7 @@ namespace EigthQueens
             MaximumRange = maxRange;
             MaxGenerations = maxGenerations;
             AlphaValue = alphaValue;
+            FunctionValue = function;
 
             Subjects = new List<Subject>();
             Generations = new List<GenerationData>();
@@ -51,7 +53,7 @@ namespace EigthQueens
         {
             for (int i = 0; i < PopulationSize; i++)
             {
-                Subject tempSubject = new Subject(DValue);
+                Subject tempSubject = new Subject(DValue, FunctionValue);
                 tempSubject.SeriesValues = RandomGenerator();
                 tempSubject.CalculateFitnessValue();
                 Subjects.Add(tempSubject);
@@ -143,8 +145,8 @@ namespace EigthQueens
         List<Subject> Crossover(Subject parentA, Subject parentB)
         {
             List<Subject> childs = new List<Subject>();
-            Subject childA = new Subject(DValue);
-            Subject childB = new Subject(DValue);
+            Subject childA = new Subject(DValue, FunctionValue);
+            Subject childB = new Subject(DValue, FunctionValue);
 
             for (int i = 0; i < parentA.SeriesValues.Count; i++)
             {

@@ -8,26 +8,49 @@ namespace EigthQueens
 {
     public class Subject
     {
-        public List<double> SeriesValues  { get; set; }
+        public List<double> SeriesValues { get; set; }
         public double FitnessValue { get; set; }
         double DValue { get; set; }
+        bool FunctionNumber { get; set; }
+        int BrokenRules { get; set; }
 
 
-        public Subject(double dValue)
+        public Subject(double dValue, bool function)
         {
             SeriesValues = new List<double>();
-            DValue = dValue;
+            if (function)
+            {
+                DValue = dValue;
+            }
+            else
+            {
+                DValue = 7;
+            }
+            FunctionNumber = function;
+            BrokenRules = 0;
         }
 
-        // f (x) = 10D + Σ to D from i=1(x²i − 10cos(2πxi))
         public void CalculateFitnessValue()
         {
-            double result;
             if (!SeriesValues.Any())
             {
                 Console.WriteLine("Empty list");
                 return;
             }
+            if (FunctionNumber)
+            {
+                FirstFunction();
+            }
+            else
+            {
+                SecondFunction();
+            }
+        }
+
+        // f (x) = 10D + Σ to D from i=1(x²i − 10cos(2πxi))
+        void FirstFunction()
+        {
+            double result;
             double summationAcum = 0;
             foreach (var item in SeriesValues)
             {
@@ -40,7 +63,20 @@ namespace EigthQueens
             result = (10 * DValue) - summationAcum; // 10D + Σ to D from i=1(x²i − 10cos(2πxi))
 
             FitnessValue = Math.Round(result, 3);
-		}
+        }
+
+        //f ( x ) = 〖(x_1  - 10)〗^2  + 5〖(x_2  - 12)〗^2  + x_3^4  + 3〖(x_4  - 11)〗^2  + 10x_5^6+ 7x_6^2  + x_7^4  - 4x_6 x_7  - 10x_6- 8x_7
+
+        void SecondFunction()
+        {
+
+        }
+
+
+        void CountBrokenRules()
+        {
+
+        }
 
         override
         public String ToString()

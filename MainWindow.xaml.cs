@@ -14,12 +14,12 @@ namespace EigthQueens
     /// </summary>
     public partial class MainWindow : Window
     {
-        Population population;
+        List<Population> populations = new List<Population>();
         public MainWindow()
         {
             InitializeComponent();
         }
-        void FillGridGenerations()
+        void FillGridGenerations(Population population)
         {
             gridGenerations.ItemsSource = null;
             gridGenerations.ItemsSource = population.Generations;
@@ -27,10 +27,12 @@ namespace EigthQueens
 
         private void btEvolution_Click(object sender, RoutedEventArgs e)
         {
-            population = new Population(50, 10, -5.120, 5.120, 10000, 0.001, 50000, 0.5);
+            Population population = new Population(50, 10, -5.120, 5.120, 10000, 0.001, 50000, 0.5);
             population.StartEvolutionProcess();
+            populations.Add(population);
             Console.WriteLine(population.CurrentEvaluation);
-            FillGridGenerations();
+            FillGridGenerations(population);
+            SetCharts();
         }
 
         void SetCharts()
@@ -40,12 +42,10 @@ namespace EigthQueens
             ChartValues<double> bestValueChart = new LiveCharts.ChartValues<double>();
             ChartValues<double> worstValueChart = new LiveCharts.ChartValues<double>();
             ChartValues<double> convergenceValue = new LiveCharts.ChartValues<double>();
-            foreach (var item in population.Generations)
+            for (int i = 0; i < populations.Count; i++)
             {
-                standardDeviationChart.Add(item.StandardDeviation);
-                mediaChart.Add(item.Media);
-                bestValueChart.Add(item.BetterSubject.FitnessValue);
-                worstValueChart.Add(item.WorstSubject.FitnessValue);
+                bestValueChart.Add(populations[i].Generations.Last().BetterSubject.FitnessValue);
+                worstValueChart.Add(populations[i].Generations.Last().WorstSubject.FitnessValue);
             }
 
             SeriesCollection standardDeviationSeries =new SeriesCollection

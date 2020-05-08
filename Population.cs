@@ -20,7 +20,8 @@ namespace EigthQueens
         double MaximumRange { get; set; }
 
         //Count Values
-        public int CurrentEvaluation { get; set; }
+        public int CurrentEvaluation { get; set; } = 0;
+        public int CurrentGeneration { get; set; } = 1;
 
         //Storage Structures
         List<Subject> Subjects { get; set; }
@@ -54,6 +55,7 @@ namespace EigthQueens
                 tempSubject.SeriesValues = RandomGenerator();
                 tempSubject.CalculateFitnessValue();
                 Subjects.Add(tempSubject);
+                CurrentEvaluation++;
             }
             OrderList();
             CurrentEvaluation = PopulationSize;
@@ -79,7 +81,7 @@ namespace EigthQueens
         List<Subject> SpinRouletteParent(int parentsNumber)
         {
             List<Subject> result = new List<Subject>();
-            double upperLimit = Generations.Last().TotalPopulationFitness;
+            double upperLimit = SummAllSubjects();
 
             for (int i = 0; i < parentsNumber; i++)
             {
@@ -90,7 +92,7 @@ namespace EigthQueens
                 while (acumSumm < spinValue)
                 {
                     acumSumm += Subjects[rouletteSelector].FitnessValue;
-                    if (rouletteSelector < Subjects.Count)
+                    if (rouletteSelector < Subjects.Count - 1)
                     {
                         selectedValue = rouletteSelector;
                         rouletteSelector++;
@@ -200,18 +202,22 @@ namespace EigthQueens
 
         public Subject ObtainBestSubject()
         {
-            Subject subject = Generations.Last().BetterSubject;
+            Subject subject = Subjects.First();
             return subject;
         }
 
         public void StartEvolutionProcess()
         {
-            int generationCont = 0;
-            while (CurrentEvaluation < MaxEval || generationCont < MaxGenerations)
+            if (CurrentEvaluation > 10000)
             {
-                GenerationData generation = new GenerationData(generationCont + 1, SummAllSubjects(), Subjects);
+                Console.WriteLine("stop");
+
+            }
+            while (CurrentEvaluation < MaxEval && CurrentGeneration < MaxGenerations)
+            {
+                GenerationData generation = new GenerationData(CurrentGeneration, SummAllSubjects(), Subjects);
                 Generations.Add(generation);
-                generationCont++;
+                CurrentGeneration++;
 
                 Reproduction();
             }

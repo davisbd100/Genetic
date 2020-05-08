@@ -18,24 +18,25 @@
         <TextBox x:Name="tbMutation" HorizontalAlignment="Left" Height="23" Margin="202,141,0,0" TextWrapping="Wrap" Text="0.8" VerticalAlignment="Top" Width="37"/>
         <Label x:Name="lbUndefinedProperty" Content="Propiedad no definida" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="42,173,0,0"/>
         <TextBox x:Name="tbUndefinedProperty" HorizontalAlignment="Left" Height="23" Margin="202,173,0,0" TextWrapping="Wrap" Text="5" VerticalAlignment="Top" Width="37"/>
-        <DataGrid x:Name="gridGenerations" HorizontalAlignment="Left" Height="332" Margin="550,78,0,0" VerticalAlignment="Top" Width="540" IsReadOnly="True"/>
-        <TextBlock x:Name="tblGenerations" HorizontalAlignment="Left" Margin="755,41,0,0" TextWrapping="Wrap" Text="Generaciones" VerticalAlignment="Top" Height="32" Width="156" FontSize="24"/>
-        <Button x:Name="btEvolution" Content="Iniciar Evolución" HorizontalAlignment="Left" Margin="130,234,0,0" VerticalAlignment="Top" Width="109" Height="23" Click="btEvolution_Click"/>
-        <Grid x:Name="standardDeviationChart" HorizontalAlignment="Left" Height="240" Margin="10,440,0,0" VerticalAlignment="Top" Width="309">
-            <lvc:CartesianChart Name="StandarDeviationChart"/>
+        <DataGrid x:Name="gridGenerations" HorizontalAlignment="Left" Height="354" Margin="324,42,0,0" VerticalAlignment="Top" Width="760" IsReadOnly="True"/>
+        <TextBlock x:Name="tblGenerations" HorizontalAlignment="Left" Margin="760,10,0,0" TextWrapping="Wrap" Text="Generaciones" VerticalAlignment="Top" Height="32" Width="156" FontSize="24"/>
+        <Button x:Name="btEvolution" Content="Iniciar Evolución" HorizontalAlignment="Left" Margin="185,373,0,0" VerticalAlignment="Top" Width="109" Height="23" Click="btEvolution_Click"/>
+        <Grid x:Name="standardDeviationChart_Copy" HorizontalAlignment="Left" Height="240" Margin="9,445,0,0" VerticalAlignment="Top" Width="309">
+            <lvc:CartesianChart x:Name="GenerationNumberChart" Margin="0,10,0,-10"/>
         </Grid>
-        <Grid x:Name="MediaGrid" HorizontalAlignment="Left" Height="240" Margin="324,440,0,0" VerticalAlignment="Top" Width="250">
-            <lvc:CartesianChart Name="MediaChart"/>
+        <Grid x:Name="MediaGrid_Copy" HorizontalAlignment="Left" Height="240" Margin="323,445,0,0" VerticalAlignment="Top" Width="250">
+            <lvc:CartesianChart x:Name="EvaluationNumberChart" Margin="0,10,0,-10"/>
         </Grid>
-        <Grid x:Name="bestValueGrid" HorizontalAlignment="Left" Height="240" Margin="579,440,0,0" VerticalAlignment="Top" Width="250">
-            <lvc:CartesianChart Name="BestValueChart"/>
+        <Grid x:Name="bestValueGrid_Copy" HorizontalAlignment="Left" Height="240" Margin="578,445,0,0" VerticalAlignment="Top" Width="250">
+            <lvc:CartesianChart x:Name="BestByGenerationChart" Margin="0,10,0,-10"/>
         </Grid>
-        <Grid x:Name="worstValueGrid" HorizontalAlignment="Left" Height="240" Margin="834,440,0,0" VerticalAlignment="Top" Width="250">
-            <lvc:CartesianChart Name="WorstValueChart"/>
+        <Grid x:Name="worstValueGrid_Copy" HorizontalAlignment="Left" Height="240" Margin="833,445,0,0" VerticalAlignment="Top" Width="250">
+            <lvc:CartesianChart x:Name="WorstByGenerationChart" Margin="0,10,0,-10"/>
         </Grid>
-        <TextBlock x:Name="tblStandardDeviation" HorizontalAlignment="Left" Margin="108,422,0,0" TextWrapping="Wrap" Text="Desviación estándar" VerticalAlignment="Top" Height="18" Width="107"/>
-        <TextBlock x:Name="tblMedia" HorizontalAlignment="Left" Margin="443,422,0,0" TextWrapping="Wrap" Text="Media" VerticalAlignment="Top" Height="18" Width="39"/>
-        <TextBlock x:Name="tblBetterValue" HorizontalAlignment="Left" Margin="678,422,0,0" TextWrapping="Wrap" Text="Valor del mejor" VerticalAlignment="Top" Height="18" Width="86"/>
-        <TextBlock x:Name="tblWorstValue" HorizontalAlignment="Left" Margin="916,422,0,0" TextWrapping="Wrap" Text="Valor del peor" VerticalAlignment="Top" Height="18" Width="77"/>
+        <TextBlock x:Name="tblGeneration" HorizontalAlignment="Left" Margin="107,427,0,0" TextWrapping="Wrap" Text="Numero de generaciones" VerticalAlignment="Top" Height="18" Width="141"/>
+        <TextBlock x:Name="tblEvaluation" HorizontalAlignment="Left" Margin="388,427,0,0" TextWrapping="Wrap" Text="Numero de evaluaciones" VerticalAlignment="Top" Height="13" Width="142"/>
+        <TextBlock x:Name="tblBestValueExecution" HorizontalAlignment="Left" Margin="635,427,0,0" TextWrapping="Wrap" Text="Valor del mejor por generación" VerticalAlignment="Top" Height="18" Width="166"/>
+        <TextBlock x:Name="tblWorstValuExecution" HorizontalAlignment="Left" Margin="886,427,0,0" TextWrapping="Wrap" Text="Valor del peor por generación" VerticalAlignment="Top" Height="18" Width="168"/>
+        <Label x:Name="lbExecutionValues" Content="Valores de las diferentes ejecuciones" HorizontalAlignment="Left" Margin="472,401,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
     </Grid>
 </Window>

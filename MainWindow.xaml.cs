@@ -37,58 +37,52 @@ namespace EigthQueens
 
         void SetCharts()
         {
-            ChartValues<double> standardDeviationChart = new LiveCharts.ChartValues<double>();
-            ChartValues<double> mediaChart = new LiveCharts.ChartValues<double>();
-            ChartValues<double> bestValueChart = new LiveCharts.ChartValues<double>();
-            ChartValues<double> worstValueChart = new LiveCharts.ChartValues<double>();
-            ChartValues<double> convergenceValue = new LiveCharts.ChartValues<double>();
+            ChartValues<double> generationNumberChart = new LiveCharts.ChartValues<double>();
+            ChartValues<double> evaluationNumberChart = new LiveCharts.ChartValues<double>();
+            ChartValues<double> bestByGenerationChart = new LiveCharts.ChartValues<double>();
+            ChartValues<double> worstByGenerationChart = new LiveCharts.ChartValues<double>();
             for (int i = 0; i < populations.Count; i++)
             {
-                bestValueChart.Add(populations[i].Generations.Last().BetterSubject.FitnessValue);
-                worstValueChart.Add(populations[i].Generations.Last().WorstSubject.FitnessValue);
+                generationNumberChart.Add(populations[i].CurrentGeneration);
+                evaluationNumberChart.Add(populations[i].CurrentEvaluation);
+                bestByGenerationChart.Add(populations[i].Generations.Last().BetterSubject.FitnessValue);
+                worstByGenerationChart.Add(populations[i].Generations.Last().WorstSubject.FitnessValue);
             }
 
-            SeriesCollection standardDeviationSeries =new SeriesCollection
+           SeriesCollection generationNumberSeries = new SeriesCollection
             {
                 new LineSeries
                 {
-                    Values = standardDeviationChart
+                    Values = generationNumberChart
                 }
             };
-            SeriesCollection mediaSeries = new SeriesCollection
+            SeriesCollection evaluationNumberSeries = new SeriesCollection
             {
                 new LineSeries
                 {
 
-                    Values = mediaChart
-                },
-                new LineSeries
-                {
-                    Title = "Valor de convergencia",
-                    Values = convergenceValue,
-                    PointGeometry = null,
-
+                    Values = evaluationNumberChart
                 }
             };
-            SeriesCollection bestValueSeries = new SeriesCollection
+            SeriesCollection bestByGenerationSeries = new SeriesCollection
             {
                 new LineSeries
                 {
-                    Values = bestValueChart
+                    Values = bestByGenerationChart
                 }
             };
-            SeriesCollection worstValueSeries = new SeriesCollection
+            SeriesCollection worstByGenerationSeries = new SeriesCollection
             {
                 new LineSeries
                 {
-                    Values = worstValueChart
+                    Values = worstByGenerationChart
                 }
             };
 
-            StandarDeviationChart.Series = standardDeviationSeries;
-            MediaChart.Series = mediaSeries;
-            BestValueChart.Series = bestValueSeries;
-            WorstValueChart.Series = worstValueSeries;
+            GenerationNumberChart.Series = generationNumberSeries;
+            EvaluationNumberChart.Series = evaluationNumberSeries;
+            BestByGenerationChart.Series = bestByGenerationSeries;
+            WorstByGenerationChart.Series = worstByGenerationSeries;
         }
     }
 }

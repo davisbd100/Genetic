@@ -208,11 +208,6 @@ namespace EigthQueens
 
         public void StartEvolutionProcess()
         {
-            if (CurrentEvaluation > 10000)
-            {
-                Console.WriteLine("stop");
-
-            }
             while (CurrentEvaluation < MaxEval && CurrentGeneration < MaxGenerations)
             {
                 GenerationData generation = new GenerationData(CurrentGeneration, SummAllSubjects(), Subjects);

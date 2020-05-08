@@ -27,12 +27,31 @@ namespace EigthQueens
 
         private void btEvolution_Click(object sender, RoutedEventArgs e)
         {
-            Population population = new Population(50, 10, -10, 10, 10000, 0.001, 50000, 0.5, true);
+            Population population = new Population(int.Parse(tbPopulation.Text), int.Parse(tbDValue.Text), double.Parse(tbMinorRange.Text), double.Parse(tbMaximumRange.Text),
+                int.Parse(tbEvaluation.Text), double.Parse(tbMutation.Text), int.Parse(tbGeneration.Text), double.Parse(tbAlphaValue.Text), (bool)rbFirstFunction.IsChecked);
             population.StartEvolutionProcess();
             populations.Add(population);
             FillGridGenerations(population);
             SetCharts();
         }
+        private void rbFirstFunction_Click(object sender, RoutedEventArgs e)
+        {
+            tbDValue.IsReadOnly = false;
+            tbMinorRange.Text = "-5.12";
+            tbMaximumRange.Text = "5.12";
+            rbSecondFunction.IsChecked = false;
+            rbFirstFunction.IsChecked = true;
+        }
+
+        private void rbSecondFunction_Click(object sender, RoutedEventArgs e)
+        {
+            tbDValue.IsReadOnly = true;
+            tbMinorRange.Text = "-10";
+            tbMaximumRange.Text = "10";
+            rbSecondFunction.IsChecked = true;
+            rbFirstFunction.IsChecked = false;
+        }
+
 
         void SetCharts()
         {
@@ -83,5 +102,6 @@ namespace EigthQueens
             BestByGenerationChart.Series = bestByGenerationSeries;
             WorstByGenerationChart.Series = worstByGenerationSeries;
         }
+
     }
 }

@@ -105,10 +105,8 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\Queen.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Board.png" />
+    <Resource Include="Resources\FirstFunction.PNG" />
+    <Resource Include="Resources\SecondFunction.PNG" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -9,18 +9,18 @@
         Title="VentanaPrincipal" Height="720" Width="1100" ResizeMode="NoResize">
     <Grid>
         <Label x:Name="lbPopulation" Content="Tamaño de poblacion:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="50,36,0,0"/>
-        <TextBox x:Name="tbPopulation" HorizontalAlignment="Left" Height="23" Margin="202,36,0,0" TextWrapping="Wrap" Text="100" VerticalAlignment="Top" Width="37"/>
+        <TextBox x:Name="tbPopulation" HorizontalAlignment="Left" Height="23" Margin="202,36,0,0" TextWrapping="Wrap" Text="50" VerticalAlignment="Top" Width="66"/>
         <Label x:Name="lbGenerationsNumber" Content="Generaciones maximas:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="42,68,0,0"/>
-        <TextBox x:Name="tbBoard" HorizontalAlignment="Left" Height="23" Margin="202,71,0,0" TextWrapping="Wrap" Text="8" VerticalAlignment="Top" Width="37"/>
+        <TextBox x:Name="tbGeneration" HorizontalAlignment="Left" Height="23" Margin="202,71,0,0" TextWrapping="Wrap" Text="50000" VerticalAlignment="Top" Width="66"/>
         <Label x:Name="lbEvaluation" Content="Evaluaciones Maximas:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="47,104,0,0"/>
-        <TextBox x:Name="tbEvaluation" HorizontalAlignment="Left" Height="23" Margin="202,104,0,0" TextWrapping="Wrap" Text="10000" VerticalAlignment="Top" Width="42"/>
+        <TextBox x:Name="tbEvaluation" HorizontalAlignment="Left" Height="23" Margin="202,104,0,0" TextWrapping="Wrap" Text="10000" VerticalAlignment="Top" Width="66"/>
         <Label x:Name="lbMutation" Content="Probabilidad de mutacion:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="28,141,0,0"/>
-        <TextBox x:Name="tbMutation" HorizontalAlignment="Left" Height="23" Margin="202,141,0,0" TextWrapping="Wrap" Text="0.8" VerticalAlignment="Top" Width="37"/>
-        <Label x:Name="lbUndefinedProperty" Content="Propiedad no definida" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="42,173,0,0"/>
-        <TextBox x:Name="tbUndefinedProperty" HorizontalAlignment="Left" Height="23" Margin="202,173,0,0" TextWrapping="Wrap" Text="5" VerticalAlignment="Top" Width="37"/>
+        <TextBox x:Name="tbMutation" HorizontalAlignment="Left" Height="23" Margin="202,141,0,0" TextWrapping="Wrap" Text="0.001" VerticalAlignment="Top" Width="66" SelectionOpacity="0.001"/>
+        <Label x:Name="lbDValue" Content="Valor de D:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="107,170,0,0"/>
+        <TextBox x:Name="tbDValue" HorizontalAlignment="Left" Height="23" Margin="202,173,0,0" TextWrapping="Wrap" Text="10" VerticalAlignment="Top" Width="66"/>
         <DataGrid x:Name="gridGenerations" HorizontalAlignment="Left" Height="354" Margin="324,42,0,0" VerticalAlignment="Top" Width="760" IsReadOnly="True"/>
         <TextBlock x:Name="tblGenerations" HorizontalAlignment="Left" Margin="760,10,0,0" TextWrapping="Wrap" Text="Generaciones" VerticalAlignment="Top" Height="32" Width="156" FontSize="24"/>
-        <Button x:Name="btEvolution" Content="Iniciar Evolución" HorizontalAlignment="Left" Margin="185,373,0,0" VerticalAlignment="Top" Width="109" Height="23" Click="btEvolution_Click"/>
+        <Button x:Name="btEvolution" Content="Iniciar Evolución" HorizontalAlignment="Left" Margin="186,399,0,0" VerticalAlignment="Top" Width="109" Height="23" Click="btEvolution_Click"/>
         <Grid x:Name="standardDeviationChart_Copy" HorizontalAlignment="Left" Height="240" Margin="9,445,0,0" VerticalAlignment="Top" Width="309">
             <lvc:CartesianChart x:Name="GenerationNumberChart" Margin="0,10,0,-10"/>
         </Grid>
@@ -38,5 +38,15 @@
         <TextBlock x:Name="tblBestValueExecution" HorizontalAlignment="Left" Margin="635,427,0,0" TextWrapping="Wrap" Text="Valor del mejor por generación" VerticalAlignment="Top" Height="18" Width="166"/>
         <TextBlock x:Name="tblWorstValuExecution" HorizontalAlignment="Left" Margin="886,427,0,0" TextWrapping="Wrap" Text="Valor del peor por generación" VerticalAlignment="Top" Height="18" Width="168"/>
         <Label x:Name="lbExecutionValues" Content="Valores de las diferentes ejecuciones" HorizontalAlignment="Left" Margin="472,401,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+        <Label x:Name="lbAlphaValue" Content="Valor de α:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="107,201,0,0"/>
+        <TextBox x:Name="tbAlphaValue" HorizontalAlignment="Left" Height="23" Margin="202,205,0,0" TextWrapping="Wrap" Text="0.5" VerticalAlignment="Top" Width="66"/>
+        <Label x:Name="lbMinorRange" Content="Valor rango minimo:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="28,246,0,0"/>
+        <TextBox x:Name="tbMinorRange" HorizontalAlignment="Left" Height="23" Margin="72,277,0,0" TextWrapping="Wrap" Text="-5.12" VerticalAlignment="Top" Width="37"/>
+        <Label x:Name="lbMaximumRange" Content="Valor de rango maximo:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="159,246,0,0"/>
+        <TextBox x:Name="tbMaximumRange" HorizontalAlignment="Left" Height="23" Margin="207,277,0,0" TextWrapping="Wrap" Text="5.12" VerticalAlignment="Top" Width="37"/>
+        <RadioButton x:Name="rbFirstFunction" Content="" HorizontalAlignment="Left" Margin="28,320,0,0" VerticalAlignment="Top" IsChecked="True" Click="rbFirstFunction_Click"/>
+        <RadioButton x:Name="rbSecondFunction" Content="" HorizontalAlignment="Left" Margin="28,354,0,0" VerticalAlignment="Top" Click="rbSecondFunction_Click"/>
+        <Image x:Name="imFirstFunction" HorizontalAlignment="Left" Height="24" VerticalAlignment="Top" Width="216" Margin="52,320,0,0" Source="Resources/FirstFunction.PNG"/>
+        <Image x:Name="imSecondFunction" HorizontalAlignment="Left" Height="40" VerticalAlignment="Top" Width="269" Margin="50,354,0,0" Source="Resources/SecondFunction.PNG"/>
     </Grid>
 </Window>

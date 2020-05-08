@@ -118,7 +118,7 @@ namespace EigthQueens
 
         void ReplaceWorst(Subject Child)
         {
-            Subjects.Remove(Subjects.First());
+            Subjects.Remove(Subjects.Last());
             Subjects.Add(Child);
             OrderList();
         }
@@ -180,6 +180,7 @@ namespace EigthQueens
             foreach (var item in childs)
             {
                 item.CalculateFitnessValue();
+                CurrentEvaluation++;
             }
             return childs;
         }
@@ -193,6 +194,7 @@ namespace EigthQueens
                     Child.SeriesValues[i] = Math.Round(random.NextDouble() * (MaximumRange - MinorRange) + MinorRange, 3); ;
                 }
             }
+            Child.CalculateFitnessValue();
             return Child;
         }
 
@@ -211,6 +213,7 @@ namespace EigthQueens
                 Generations.Add(generation);
                 generationCont++;
 
+                Reproduction();
             }
         }
     }

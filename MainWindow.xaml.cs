@@ -27,11 +27,10 @@ namespace EigthQueens
 
         private void btEvolution_Click(object sender, RoutedEventArgs e)
         {
-            population = new Population(50,10,-5.120,5.120,10000,0.8,50000);
+            population = new Population(50, 10, -5.120, 5.120, 10000, 0.001, 50000, 0.5);
             population.StartEvolutionProcess();
             Console.WriteLine(population.CurrentEvaluation);
             FillGridGenerations();
-            SetCharts();
         }
 
         void SetCharts()

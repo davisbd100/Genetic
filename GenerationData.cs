@@ -22,8 +22,8 @@ namespace EigthQueens
             TotalPopulationFitness = totalPopulationFitness;
             Media = CalculateMedia(generationList);
             Median = CalculateMedian(generationList);
-            BetterSubject = generationList.Last();
-            WorstSubject = generationList.First();
+            BetterSubject = generationList.First();
+            WorstSubject = generationList.Last();
             StandardDeviation = CalculateStandardDeviation(generationList);
         }
 

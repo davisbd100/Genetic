@@ -12,7 +12,7 @@ namespace EigthQueens
         public double FitnessValue { get; set; }
         double DValue { get; set; }
         bool FunctionNumber { get; set; }
-        int BrokenRules { get; set; }
+        public int BrokenRules { get; set; }
 
 
         public Subject(double dValue, bool function)

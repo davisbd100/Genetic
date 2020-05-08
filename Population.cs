@@ -65,7 +65,7 @@ namespace EigthQueens
 
         void OrderList()
         {
-            Subjects = Subjects.OrderBy(a => a.FitnessValue).ToList();
+            Subjects = Subjects.OrderBy(a => a.BrokenRules).ThenBy(a => a.FitnessValue).ToList();
         }
         List<double> RandomGenerator()
         {

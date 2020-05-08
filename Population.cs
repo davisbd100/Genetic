@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 
 namespace EigthQueens
 {
@@ -10,6 +11,7 @@ namespace EigthQueens
     {
         //Configuration Values
         double MutationProbability { get; set; }
+        double AlphaValue { get; set; }
         int PopulationSize { get; set; }
         int MaxEval { get; set; }
         int MaxGenerations { get; set; }
@@ -27,7 +29,7 @@ namespace EigthQueens
         //Miscelanous Values
         static readonly Random random = new Random();
 
-        public Population(int populationSize, int dValue, double minorRange, double maxRange, int maxEval, double mutationProbability, int maxGenerations)
+        public Population(int populationSize, int dValue, double minorRange, double maxRange, int maxEval, double mutationProbability, int maxGenerations, double alphaValue)
         {
             PopulationSize = populationSize;
             MaxEval = maxEval;
@@ -36,6 +38,7 @@ namespace EigthQueens
             MinorRange = minorRange;
             MaximumRange = maxRange;
             MaxGenerations = maxGenerations;
+            AlphaValue = alphaValue;
 
             Subjects = new List<Subject>();
             Generations = new List<GenerationData>();
@@ -113,39 +116,72 @@ namespace EigthQueens
             return result;
         }
 
-        //Subject GetChild(Subject ParentA, Subject ParentB)
-        //{
-        //    CurrentEvaluation++;
-
-        //}
-        void ReplaceWorst(Subject ChildA, Subject ChildB)
+        void ReplaceWorst(Subject Child)
         {
             Subjects.Remove(Subjects.First());
-            Subjects.Remove(Subjects.First());
-
-            ChildA.CalculateFitnessValue();
-            ChildB.CalculateFitnessValue();
-            Subjects.Add(ChildA);
-            Subjects.Add(ChildB);
+            Subjects.Add(Child);
             OrderList();
         }
 
-        //void Reproduction()
-        //{
-        //    List<Subject> parents = new List<Subject>();
+        void Reproduction()
+        {
+            List<Subject> parents = SpinRouletteParent(2);
 
-        //    if (random.NextDouble() <= MutationProbability)
-        //    {
-        //        childA = Mutate(childA);
-        //    }
+            List<Subject> childs = Crossover(parents[0], parents[1]);
 
-        //    if (random.NextDouble() <= MutationProbability)
-        //    {
-        //        childB = Mutate(childB);
-        //    }
+            if (random.NextDouble() <= MutationProbability)
+            {
+                child = Mutate(child);
+            }
 
-        //    ReplaceWorst(childA, childB);
-        //}
+            ReplaceWorst(child);
+        }
+
+        List<Subject> Crossover(Subject parentA, Subject parentB)
+        {
+            List<Subject> childs = new List<Subject>();
+            Subject childA = new Subject(DValue);
+            Subject childB = new Subject(DValue);
+
+            for (int i = 0; i < parentA.SeriesValues.Count; i++)
+            {
+                double CMax;
+                double CMin;
+                if (parentA.SeriesValues[i] > parentB.SeriesValues[i])
+                {
+                    CMax = parentA.SeriesValues[i];
+                    CMin = parentB.SeriesValues[i];
+                }
+                else
+                {
+                    CMax = parentB.SeriesValues[i];
+                    CMin = parentA.SeriesValues[i];
+                }
+                double l = CMax - CMin;
+                double MinValue = CMin - (l * AlphaValue);
+                double MaxValue = CMax + (l * AlphaValue);
+
+                if (MinValue < MinorRange)
+                {
+                    MinValue = MinorRange;
+                }
+
+                if (MaxValue > MaximumRange)
+                {
+                    MaxValue = MaximumRange;
+                }
+
+                childA.SeriesValues.Add(Math.Round(random.NextDouble() * (MaxValue - MinValue) + MinValue, 3));
+                childB.SeriesValues.Add(Math.Round(random.NextDouble() * (MaxValue - MinValue) + MinValue, 3));
+            }
+            childs.Add(childA);
+            childs.Add(childB);
+            foreach (var item in childs)
+            {
+                item.CalculateFitnessValue();
+            }
+            return childs;
+        }
 
         //Subject Mutate(Subject Child)
         //{

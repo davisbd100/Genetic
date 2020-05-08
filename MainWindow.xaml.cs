@@ -27,7 +27,7 @@ namespace EigthQueens
 
         private void btEvolution_Click(object sender, RoutedEventArgs e)
         {
-            Population population = new Population(50, 10, -5.120, 5.120, 10000, 0.001, 50000, 0.5);
+            Population population = new Population(50, 10, -10, 10, 10000, 0.001, 50000, 0.5, false);
             population.StartEvolutionProcess();
             populations.Add(population);
             FillGridGenerations(population);

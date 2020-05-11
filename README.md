@@ -3,9 +3,16 @@ Hecho en *C#* utilizando *WPF* con el framework *.NET 4.7.2*
 
 
 # Funcionamiento
+- Los valores posibles a modificar se muestran a la izquierda
+- El valor de D, solo se podra modificar en el primer problema al ser una sumatoria, en el segundo siempre se tomara el valor de 7
+- Se puede seleccionar el problema deseado en cualquier momento
+- Las graficas mostradas se van actualizando a traves de las diferentes ejecuciones del algoritmo
 
 ## Funciones a minimizar
-
+### Primer Funcion
+![alt text](/Resources/FirstFunction.png "Logo Title Text 1")
+### Segunda Funcion
+![alt text](/Resources/SecondFunction.png "Logo Title Text 1")
 
 
 ## Definicion de forma de implementacion a tener en cuenta

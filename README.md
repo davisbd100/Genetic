@@ -12,7 +12,7 @@ Hecho en *C#* utilizando *WPF* con el framework *.NET 4.7.2*
 
 |                          |                                                     |
 |--------------------------|-----------------------------------------------------|
-| Representación           | Permutaciones                                       |
+| Representación           | Real                                                |
 | Inicialización           | Aleatoria                                           |
 | Selección de padres      | Ruleta                                              |
 | Numero de descendientes  | 2                                                   |

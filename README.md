@@ -12,7 +12,7 @@ Hecho en *C#* utilizando *WPF* con el framework *.NET 4.7.2*
 ### Primer Funcion
 ![alt text](https://github.com/davisbd100/Genetic/blob/master/Resources/FirstFunction.PNG "Logo Title Text 1")
 ### Segunda Funcion
-![alt text](https://github.com/davisbd100/Genetic/blob/master/Resources/FirstFunction.PNG "Logo Title Text 1")
+![alt text](https://github.com/davisbd100/Genetic/blob/master/Resources/SecondFunction.PNG "Logo Title Text 1")
 
 
 ## Definicion de forma de implementacion a tener en cuenta

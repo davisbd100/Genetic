@@ -80,7 +80,7 @@ namespace EigthQueens
             double ninthValue = (10 * SeriesValues[5]); //10x_6
             double tenthValue = (8 * SeriesValues[6]); //8x_7
 
-            FitnessValue = firstValue + secondValue + thirdValue + fourthValue + fifthValue + sixthValue + seventhValue - eighthValue - ninthValue - tenthValue;
+            FitnessValue = Math.Round(firstValue + secondValue + thirdValue + fourthValue + fifthValue + sixthValue + seventhValue - eighthValue - ninthValue - tenthValue, 3);
             CountBrokenRules();
 
         }

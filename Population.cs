@@ -93,7 +93,7 @@ namespace EigthQueens
                 int selectedValue = 0;
                 while (acumSumm < spinValue)
                 {
-                    acumSumm += Subjects[rouletteSelector].FitnessValue;
+                    acumSumm += Math.Abs(Subjects[rouletteSelector].FitnessValue);
                     if (rouletteSelector < Subjects.Count - 1)
                     {
                         selectedValue = rouletteSelector;

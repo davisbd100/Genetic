@@ -60,7 +60,7 @@ namespace EigthQueens
                 double fourthValue = Math.Pow(item, 2) - thirdValue; // (x²i − 10cos(2πxi)
                 summationAcum += fourthValue;
             }
-            result = (10 * DValue) - summationAcum; // 10D + Σ to D from i=1(x²i − 10cos(2πxi))
+            result = (10 * DValue) + summationAcum; // 10D + Σ to D from i=1(x²i − 10cos(2πxi))
 
             FitnessValue = Math.Round(result, 3);
         }
